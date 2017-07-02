@@ -1,0 +1,34 @@
+<div class="pure-g">
+  <div class="sidebar pure-u-1 pure-u-md-1-4">
+    <div class="header">
+      <h1><%= @survey.name %></h1>
+      <p><%= @survey.description %></p>
+      <%= link_to 'Edit', edit_survey_path(@survey), class: 'pure-button' %>
+    </div>
+  </div>
+  <div class="content pure-u-1 pure-u-md-3-4">
+    <p id="notice"><%= notice %></p>
+    <div class="pure-form">
+      <table>
+        <thead>
+          <tr>
+            <% @survey.fields.pluck("fields.name, fields.options ->> 'required'").each do |name, required| %>
+              <th><%= '*' if required == 'true' %><%= name %></th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @survey.fields.each do |field| %>
+              <td>
+                <%= render "surveys/fields/#{field.type}", field: field %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <%= link_to 'Edit', edit_survey_path(@survey) %>
+    <%= link_to 'Back', surveys_path %>
+  </div>
+</div>

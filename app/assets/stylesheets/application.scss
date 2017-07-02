@@ -1,0 +1,126 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_self
+ */
+
+// @import url('http://fonts.googleapis.com/css?family=Raleway:400,300,600');
+@import 'purecss';
+@import 'table';
+
+// html,
+// button,
+// input,
+// select,
+// textarea,
+// .pure-g [class *= "pure-u"] {
+//   font-family: 'Raleway', sans-serif;
+// }
+
+h1 {
+  font-weight: 300;
+}
+
+.sidebar {
+  background: rgb(61, 79, 93);
+  color: #fff;
+
+  .header input,
+  .header textarea {
+    background-color: inherit;
+    box-shadow: none;
+    text-align: center;
+  }
+
+  .h1 {
+    font-size: 2em;
+    font-weight: 300;
+  }
+}
+
+@media (min-width: 48em) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+
+    .header input,
+    .header textarea {
+      text-align: right;
+    }
+  }
+}
+
+.content {
+  padding: 2em 1em 0;
+}
+
+@media (min-width: 48em) {
+  .content {
+    padding: 2em 3em 0;
+    margin-left: 25%;
+  }
+}
+
+.header {
+  text-align: center;
+  top: auto;
+  margin: 3em auto;
+}
+
+@media (min-width: 48em) {
+  .header {
+    margin: 80% 2em 0;
+    text-align: right;
+  }
+}
+
+article:nth-child(odd) {
+  background: linear-gradient(to right, #8effd3 0%, #70e1ff 100%);
+}
+
+.content-subhead {
+  text-transform: uppercase;
+  color: #aaa;
+  border-bottom: 1px solid #eee;
+  padding: 0.4em 0;
+  font-size: 80%;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.pull-right {
+  float: right;
+}
+
+.pure-form {
+  .pure-form--error {
+    input {
+      border-color: #e23b3b;
+
+      &:focus {
+        border-color: #e23b3b;
+      }
+    }
+
+    label,
+    span {
+      color: #e23b3b;
+    }
+
+    span {
+      display: block;
+      font-size: .8em;
+      margin: .1em 0 0 14em;
+    }
+  }
+}

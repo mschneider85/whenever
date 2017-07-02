@@ -1,0 +1,51 @@
+table {
+  border-collapse: collapse;
+  color: #333;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+th,
+td {
+  padding: 1em;
+}
+
+tr {
+  height: 3em;
+}
+
+th {
+  white-space: nowrap;
+}
+
+thead {
+  border-bottom: 3px solid #e0e0e0;
+
+  // th {
+  //   text-transform: uppercase;
+  // }
+}
+
+tbody {
+  th {
+    text-align: left;
+  }
+
+  tr th,
+  tr th:first-child {
+    border-right: 3px solid #e0e0e0;
+  }
+
+  td:not(:last-child) {
+    border-right: 1px solid #e0e0e0;
+  }
+
+  tr:hover:not(:last-child) {
+    background-color: #eee;
+  }
+}
+
+.responsive-table {
+  overflow: auto;
+}

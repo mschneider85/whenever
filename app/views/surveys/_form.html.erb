@@ -1,0 +1,88 @@
+<%= content_tag :div,
+  id: "survey-form",
+  data: {
+    token: survey.token,
+    survey: survey.to_json(except: [:id, :token, :created_at, :updated_at]),
+    fields_attributes: survey.fields.to_json(except: [:survey_id, :options, :created_at, :updated_at])
+  } do %>
+  <div class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+      <div class="header">
+        <h1>{{ survey.name }}</h1>
+        <p>{{ survey.description }}</p>
+      </div>
+    </div>
+    <div class="content pure-u-1 pure-u-md-3-4 pure-form pure-form-aligned">
+      <legend>Einstellungen</legend>
+      <fieldset>
+        <div class="pure-control-group" v-bind:class="{ 'pure-form--error': $v.survey.name.$error }">
+          <label>Name</label>
+          <input
+            type="text"
+            class="pure-input-1-2"
+            v-model="survey.name"
+            @input="delayTouch($v.survey.name)"
+          />
+          <span class="pure-form--error" v-if="$v.survey.name.$error">muss ausgefüllt werden</span>
+        </div>
+        <div class="pure-control-group">
+          <label>Description</label>
+          <input
+            type="text"
+            class="pure-input-1-2"
+            v-model="survey.description"
+          />
+        </div>
+      </fieldset>
+      <hr />
+      <legend>Abfragen</legend>
+      <fieldset v-for="(field, index) in survey.fields_attributes">
+        <div v-if="field._destroy == '1'">
+          <div class="pure-control-group">
+            {{ field.name }} will be removed. <button class="pure-button" v-on:click="undoRemove(index)">Undo</button>
+          </div>
+        </div>
+        <div v-else>
+          <div class="pure-control-group">
+            <label>Type</label>
+            <select v-model="field.type" class="pure-input-1-2">
+              <option
+                v-for="type in types"
+                v-bind:value="type.value">
+                {{ type.name }}
+              </option>
+            </select>
+          </div>
+          <div class="pure-control-group" v-bind:class="{ 'pure-form--error': $v.survey.fields_attributes.$each[index].name.$error }">
+            <label>Field Name</label>
+            <input
+              type="text"
+              class="pure-input-1-2"
+              v-model="field.name"
+              @input="delayTouch($v.survey.fields_attributes.$each[index].name)"
+            />
+            <span class="pure-form--error" v-if="$v.survey.fields_attributes.$each[index].name.$error">muss ausgefüllt werden</span>
+          </div>
+          <input-tag v-if="field.type == 'select'" v-model="field.values" :tags="field.values" :label="'Werte'"></input-tag>
+          <div class="pure-controls">
+            <label class="pure-checkbox">
+              <input
+                type="checkbox"
+                v-model="field.required">
+                Required
+              </input>
+            </label>
+          </div>
+          <button class="pure-button" v-on:click="removeField(index)">Remove</button>
+        </div>
+
+        <hr />
+      </fieldset>
+
+      <button v-on:click="addField">Add Field</button>
+
+      <br />
+      <button v-on:click="saveSurvey">Save Survey</button>
+    </div>
+  </div>
+<% end %>
