@@ -1,0 +1,11 @@
+<%= form_with(model: participation) do |f| %>
+  <%= f.hidden_field :survey_id, value: survey.id %>
+  <%= f.fields_for :answers, OpenStruct.new(participation.answers) do |builder| %>
+    <% survey.fields.order(:created_at).each do |field| %>
+      <td>
+        <%= render "surveys/fields/#{field.type}", field: field, f: builder, parent: f %>
+      </td>
+    <% end %>
+  <% end %>
+  <td><%= f.submit 'speichern', class: 'pure-button' %></td>
+<% end %>

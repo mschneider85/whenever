@@ -9,26 +9,28 @@
   <div class="content pure-u-1 pure-u-md-3-4">
     <p id="notice"><%= notice %></p>
     <div class="pure-form">
-      <table>
-        <thead>
-          <tr>
-            <% @survey.fields.pluck("fields.name, fields.options ->> 'required'").each do |name, required| %>
-              <th><%= '*' if required == 'true' %><%= name %></th>
+      <div class="responsive-table">
+        <table>
+          <thead>
+            <tr>
+              <% @survey.fields.order(:created_at).pluck("fields.name, fields.options ->> 'required'").each do |name, required| %>
+                <th><%= '*' if required == 'true' %><%= name %></th>
+              <% end %>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="participations">
+            <% @survey.participations.order(:created_at).each do |participation| %>
+              <%= render 'participation', participation: participation %>
             <% end %>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <% @survey.fields.each do |field| %>
-              <td>
-                <%= render "surveys/fields/#{field.type}", field: field %>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
+          </tbody>
+          <tfoot>
+            <tr id="participation-form">
+              <%= render 'participation_form', participation: @participation, survey: @survey %>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
-    <%= link_to 'Edit', edit_survey_path(@survey) %>
-    <%= link_to 'Back', surveys_path %>
   </div>
 </div>

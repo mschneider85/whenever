@@ -21,13 +21,10 @@ th {
 
 thead {
   border-bottom: 3px solid #e0e0e0;
-
-  // th {
-  //   text-transform: uppercase;
-  // }
 }
 
-tbody {
+tbody,
+tfoot {
   th {
     text-align: left;
   }
@@ -40,10 +37,16 @@ tbody {
   td:not(:last-child) {
     border-right: 1px solid #e0e0e0;
   }
+}
 
-  tr:hover:not(:last-child) {
+tbody {
+  tr:hover {
     background-color: #eee;
   }
+}
+
+tfoot {
+  border-top: 3px solid #e0e0e0;
 }
 
 .responsive-table {

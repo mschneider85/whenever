@@ -9,7 +9,7 @@ import TurbolinksAdapter from 'vue-turbolinks'
 import VueResource from 'vue-resource'
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
-import InputTag from './inputTag'
+import InputTag from './components/inputTag'
 
 Vue.use(VueResource)
 
@@ -30,6 +30,16 @@ document.addEventListener('turbolinks:load', () => {
       { value: 'select', name: 'Select' },
       { value: 'text', name: 'Text' },
     ]
+    if (token == null) {
+      survey.fields_attributes.push({
+        id: null,
+        type: 'text',
+        name: "Name",
+        values: [],
+        required: true,
+        _destroy: null
+      })
+    }
 
     var app = new Vue({
       el: element,

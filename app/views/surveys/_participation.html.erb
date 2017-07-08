@@ -1,0 +1,14 @@
+<tr data-participation-id=<%= participation.id %>>
+  <% participation.survey.fields.order(:created_at).each do |field| %>
+    <td>
+      <% if field.type == 'checkbox' %>
+        <%= check_box_tag field.name, '1', participation.answers[field.name] == '1', onclick: 'return false;' %>
+      <% else %>
+        <%= participation.answers[field.name] %>
+      <% end %>
+    </td>
+  <% end %>
+  <td>
+    <%= link_to 'Remove', participation_path(participation), method: :delete, class: 'pure-button', remote: true %>
+  </td>
+</tr>

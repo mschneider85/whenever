@@ -4,7 +4,7 @@ class CreateFields < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :type, null: false, default: 'text', index: true
       t.jsonb :options, null: false, default: {}
-      t.belongs_to :survey, foreign_key: true, index: true
+      t.belongs_to :survey, index: true
 
       t.timestamps
 

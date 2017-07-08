@@ -1,0 +1,57 @@
+.collapse {
+
+    > input[type="checkbox"] {
+
+        display: none;
+
+        &:checked {
+
+            ~ label::after {
+                @include transform(rotate(180deg));
+            }
+
+            ~ .collapse__content {
+                display: block;
+            }
+
+        }
+
+    }
+
+    > label {
+
+        display: block;
+        padding: 8px;
+        cursor: pointer;
+        background-color: #ccc;
+
+        &::after {
+            content: '▾';
+            display: inline-block;
+            margin-left: 4px;
+        }
+
+    }
+
+    &__content {
+        padding: 8px;
+        display: none;
+    }
+
+    &--collapse-on-sm {
+
+        @media (min-width: 600px) {
+
+            & > label {
+                display: none;
+            }
+
+            .collapse__content {
+                display: block;
+            }
+
+        }
+
+    }
+
+}

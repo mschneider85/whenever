@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+10.times do
+  Survey.last.participations.create
+end
+
+Participation.all.each do |participation|
+  Survey.last.fields.each do |field|
+    participation.answers.create_with(text: 'asdasd'.chars.sample(4).join).find_or_create_by(field: field)
+  end
+end

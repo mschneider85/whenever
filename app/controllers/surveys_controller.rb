@@ -1,5 +1,5 @@
 class SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :edit, :update, :destroy]
+  before_action :set_survey, only: %i[show edit update destroy]
 
   # GET /surveys
   # GET /surveys.json
@@ -10,6 +10,7 @@ class SurveysController < ApplicationController
   # GET /surveys/1
   # GET /surveys/1.json
   def show
+    @participation = Participation.new(survey: @survey)
   end
 
   # GET /surveys/new

@@ -1,11 +1,10 @@
 class Field < ApplicationRecord
   belongs_to :survey
-  serialize :value
 
-  TYPES = %w(checkbox select text).freeze
+  TYPES = %w[checkbox select text].freeze
 
   jsonb_accessor :options,
-    values: [array: true, default: []],
+    values:  [array: true, default: []],
     required: [:boolean, default: false]
 
   validates :name, presence: true

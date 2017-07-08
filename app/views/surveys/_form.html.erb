@@ -3,7 +3,7 @@
   data: {
     token: survey.token,
     survey: survey.to_json(except: [:id, :token, :created_at, :updated_at]),
-    fields_attributes: survey.fields.to_json(except: [:survey_id, :options, :created_at, :updated_at])
+    fields_attributes: survey.fields.order(:created_at).to_json(except: [:survey_id, :options, :created_at, :updated_at])
   } do %>
   <div class="pure-g">
     <div class="sidebar pure-u-1 pure-u-md-1-4">
@@ -64,14 +64,12 @@
             <span class="pure-form--error" v-if="$v.survey.fields_attributes.$each[index].name.$error">muss ausgefüllt werden</span>
           </div>
           <input-tag v-if="field.type == 'select'" v-model="field.values" :tags="field.values" :label="'Werte'"></input-tag>
-          <div class="pure-controls">
-            <label class="pure-checkbox">
-              <input
-                type="checkbox"
-                v-model="field.required">
-                Required
-              </input>
-            </label>
+          <div class="pure-control-group">
+            <label>Required</label>
+            <select v-model="field.required">
+              <option value="false">false</option>
+              <option value="true">true</option>
+            </select>
           </div>
           <button class="pure-button" v-on:click="removeField(index)">Remove</button>
         </div>
